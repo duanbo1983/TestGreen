@@ -1,0 +1,31 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+        testPackageName "com.telenav.testgreen.app.tests"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile ('com.android.support:appcompat-v7:19.+')
+    compile ('fr.avianey:facebook-android-api:3.8.+') {
+        //excluding a particular transitive dependency.
+        //One of below two could exclude support-v4 lib depended by FB SDK.
+        exclude module: 'support-v4' //by artifact name
+        exclude group: 'com.google.android' //by group
+    }
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
